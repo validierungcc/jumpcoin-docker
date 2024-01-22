@@ -1,6 +1,6 @@
-FROM alpine:3.19 as builder
+FROM ubuntu:22.04 as builder
 
-RUN apk add --no-cache git make autoconf pkgconfig automake g++ libtool db-dev boost-dev openssl-dev libevent-dev
+RUN apt-get update && apt-get install -y git make wget autoconf pkg-config automake g++ libtool libdb-dev libdb++-dev libboost-all-dev libssl-dev libevent-dev
 RUN addgroup --gid 1000 jump
 RUN adduser --disabled-password --gecos "" --home /jump --ingroup jump --uid 1000 jump
 
@@ -18,9 +18,8 @@ RUN ./autogen.sh
 RUN ./configure BDB_LIBS="-L/jump/jumpcoin/db-6.2.32/build_unix -ldb_cxx" BDB_CFLAGS="-I/jump/jumpcoin/db-6.2.32/build_unix"
 RUN make
 
-FROM alpine:3.19
-
-RUN apk add --no-cache libtool db-dev libevent-dev boost-dev bash
+FROM ubuntu:22.04
+RUN apt-get update && apt-get install -y git make autoconf pkg-config automake g++ libtool libdb-dev libdb++-dev libboost-all-dev libssl-dev libevent-dev
 RUN addgroup --gid 1000 jump
 RUN adduser --disabled-password --gecos "" --home /jump --ingroup jump --uid 1000 jump
 

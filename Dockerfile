@@ -13,14 +13,14 @@ RUN tar -xzf db-6.2.32.tar.gz
 
 WORKDIR /jump/jumpcoin/jumpcoin
 RUN git checkout tags/2.0
-RUN chmod +x autogen.sh configure.ac
+RUN chmod +x autogen.sh configure.ac share/genbuild.sh
 RUN ./autogen.sh
 RUN ./configure BDB_LIBS="-L/jump/jumpcoin/db-6.2.32/build_unix -ldb_cxx" BDB_CFLAGS="-I/jump/jumpcoin/db-6.2.32/build_unix"
 RUN make
 
 FROM alpine:3.19
 
-RUN apk add --no-cache boost-dev db-dev miniupnpc-dev zlib-dev bash curl
+RUN apk add --no-cache libtool db-dev libevent-dev boost-dev bash
 RUN addgroup --gid 1000 jump
 RUN adduser --disabled-password --gecos "" --home /jump --ingroup jump --uid 1000 jump
 

@@ -15,8 +15,8 @@ minimal example docker-compose.yml
             image: vfvalidierung/jumpcoin:latest
             restart: unless-stopped
             ports:
-                - '4555:4555'
-                - '127.0.0.1:4444:4444'
+                - '31242:31242'
+                - '127.0.0.1:31240:31240'
             volumes:
                 - 'jumpcoin_data:/jump/.jumpcoin'
     volumes:

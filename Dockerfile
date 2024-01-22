@@ -1,18 +1,21 @@
-FROM alpine:3.18.2 as builder
+FROM alpine:3.19 as builder
 
-RUN apk add --no-cache git make g++ boost-dev openssl-dev db-dev miniupnpc-dev zlib-dev
+RUN apk add --no-cache git make autoconf pkgconfig automake g++ libtool db-dev
 RUN addgroup --gid 1000 jump
 RUN adduser --disabled-password --gecos "" --home /jump --ingroup jump --uid 1000 jump
 
 USER jump
 
-RUN git clone git@github.com:Jumperbillijumper/jumpcoin.git /jump/jumpcoin
+RUN git clone https://github.com/Jumperbillijumper/jumpcoin.git /jump/jumpcoin
 WORKDIR /jump/jumpcoin
 RUN git checkout tags/2.0
 WORKDIR /jump/jumpcoin/src
+RUN chmod +x /jump/jumpcoin/autogen.sh /jump/jumpcoin/configure.ac
+RUN /jump/jumpcoin/autogen.sh
+RUN ../configure
 RUN make -f makefile.unix
 
-FROM alpine:3.18.2
+FROM alpine:3.19
 
 RUN apk add --no-cache boost-dev db-dev miniupnpc-dev zlib-dev bash curl
 RUN addgroup --gid 1000 jump

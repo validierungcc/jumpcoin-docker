@@ -20,7 +20,7 @@ echo "Created new configuration at ${JUMPCOIN_CONF}"
 fi
 
 if [ $# -eq 0 ]; then
-  /jump/jumpcoin/src/jumpcoind -rpcbind=:4444 -rpcallowip=* -printtoconsole=1
+  /jump/jumpcoin/src/jumpcoind -rpcbind=:31240 -rpcallowip=* -printtoconsole=1
 else
   exec "$@"
 fi

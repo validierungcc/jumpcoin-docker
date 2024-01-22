@@ -24,4 +24,4 @@ minimal example docker-compose.yml
 
 **RPC Access**
 
-    curl --user 'jumpcoinrpc:<password>' --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"getinfo","params":[]}' -H "Content-Type: application/json" http://127.0.0.1:4444
+    curl --user 'jumpcoinrpc:<password>' --data-binary '{"jsonrpc":"2.0","id":"curltext","method":"getinfo","params":[]}' -H "Content-Type: application/json" http://127.0.0.1:31240
